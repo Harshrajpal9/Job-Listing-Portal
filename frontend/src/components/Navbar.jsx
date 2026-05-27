@@ -21,20 +21,6 @@ export default function Navbar({ children, setIsEditing }) {
 
   const [keyword, setKeyword] = useState("");
 
-  // const email = localStorage.getItem("userEmail");
-
-  // useEffect(() => {
-  //   const handleStorageChange = () => {
-  //     const email = localStorage.getItem("userEmail");
-  //     setAvatar(localStorage.getItem(`avatar_${email}`));
-  //   };
-
-  //   window.addEventListener("storage", handleStorageChange);
-
-  //   return () => {
-  //     window.removeEventListener("storage", handleStorageChange);
-  //   };
-  // }, []);
 
   const role = localStorage.getItem("role");
 
