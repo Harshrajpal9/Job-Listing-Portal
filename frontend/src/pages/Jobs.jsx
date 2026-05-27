@@ -100,20 +100,7 @@ export default function Jobs() {
     fetchAppliedJobs();
   }, []);
 
-  // const handleUnapply = async (jobId) => {
-  //   try {
-  //     const token = localStorage.getItem("token");
-  //     await axios.delete(`http://localhost:5000/api/applications/${jobId}`, {
-  //       headers: { Authorization: `Bearer ${token}` },
-  //     });
 
-  //     toast.success("Application withdrawn");
-  //     fetchAppliedJobs(); // refresh applied jobs
-  //   } catch (err) {
-  //     console.error(err);
-  //     toast.error("Failed to withdraw application");
-  //   }
-  // };
   const handleUnapply = async (jobId) => {
     try {
       const token = localStorage.getItem("token");
