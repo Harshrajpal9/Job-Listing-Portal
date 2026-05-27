@@ -61,33 +61,7 @@ exports.getMyApplications = async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 };
-// exports.getMyApplications = async (req, res) => {
-//   try {
-//     const applications = await Application.find({
-//       applicant: req.user._id,
-//     })
-//       .populate("job")
-//       .sort({ createdAt: -1 });
 
-//     // ✅ Transform response for frontend
-//     const formatted = applications.map((app) => ({
-//       _id: app._id,
-//       status: app.status.toLowerCase(), // "Pending" → "pending"
-//       createdAt: app.createdAt,
-//       jobId: {
-//         _id: app.job._id,
-//         title: app.job.title,
-//         location: app.job.location,
-//         salary: `${app.job.salaryMin} - ${app.job.salaryMax}`,
-//       },
-//     }));
-
-//     res.json(formatted);
-//   } catch (err) {
-//     console.error(err);
-//     res.status(500).json({ message: "Server error" });
-//   }
-// };
 
 
 // 🧑‍💼 GET EMPLOYER APPLICATIONS
