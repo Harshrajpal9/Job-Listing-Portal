@@ -9,9 +9,20 @@ const applicationRoutes = require("./routes/applicationRoutes");
 
 const app = express();
 
+const allowedOrigins = [
+  "http://localhost:3000",
+  "https://nexaris-listing-portal-mu.vercel.app",
+];
+
 app.use(
   cors({
-    origin: process.env.CLIENT_URL,
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     credentials: true,
   })
 );
