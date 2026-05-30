@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar";
 import { useLocation } from "react-router-dom";
 import toast from "react-hot-toast";
 import { UserContext } from "../context/UserContext";
+import API_URL from "../config";
 
 const EmployerProfile = () => {
   const { user, setUser } = useContext(UserContext);
@@ -30,14 +31,14 @@ const EmployerProfile = () => {
 
     const fetchProfile = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/api/employers/${email}`);
+        const res = await fetch(`${API_URL}/api/employers/${email}`);
         const data = await res.json();
 
         if (data.success && data.data) {
           setCompany(data.data);
           setProfileExists(true);
           setIsEditing(location.state?.edit || false);
-          
+
           // update context with fetched employer data
           setUser((prev) => ({
             ...prev,
@@ -88,16 +89,17 @@ const EmployerProfile = () => {
     try {
       const method = profileExists ? "PUT" : "POST";
       const url = profileExists
-        ? `http://localhost:5000/api/employers/${email}`
-        : "http://localhost:5000/api/employers";
+        ? `${API_URL}/api/employers/${email}`
+        : `${API_URL}/api/employers`;
 
       const res = await fetch(url, {
         method,
         headers: { "Content-Type": "application/json" },
-body: JSON.stringify({
-  ...company,
-  email: user.email, 
-})      });
+        body: JSON.stringify({
+          ...company,
+          email: user.email,
+        }),
+      });
 
       const data = await res.json();
 

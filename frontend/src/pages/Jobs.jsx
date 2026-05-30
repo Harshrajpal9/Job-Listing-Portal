@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { FaMapMarkerAlt, FaBriefcase, FaRupeeSign } from "react-icons/fa";
 import { MdCategory } from "react-icons/md";
 import Swal from "sweetalert2";
+import API_URL from "../config";
 
 export default function Jobs() {
   const [jobs, setJobs] = useState([]);
@@ -22,7 +23,7 @@ export default function Jobs() {
   const [appliedJobs, setAppliedJobs] = useState([]);
   const searchJobs = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/jobs", {
+      const res = await axios.get(`${API_URL}/api/jobs`, {
         params: {
           ...(keyword.trim() && { keyword: keyword.trim() }),
           ...(location.trim() && { location: location.trim() }),
@@ -56,7 +57,7 @@ export default function Jobs() {
 
     try {
       const token = localStorage.getItem("token"); // get JWT token
-      await axios.delete(`http://localhost:5000/api/jobs/${id}`, {
+      await axios.delete(`${API_URL}/api/jobs/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`, // send it in header
         },
@@ -79,7 +80,7 @@ export default function Jobs() {
       const token = localStorage.getItem("token");
       if (!token) return;
 
-      const res = await axios.get("http://localhost:5000/api/applications/my", {
+      const res = await axios.get(`${API_URL}/api/applications/my`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -111,7 +112,7 @@ export default function Jobs() {
       if (!app) return;
 
       await axios.delete(
-        `http://localhost:5000/api/applications/${app.applicationId}`,
+        `${API_URL}/api/applications/${app.applicationId}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -242,7 +243,7 @@ export default function Jobs() {
                               try {
                                 const token = localStorage.getItem("token");
                                 await axios.post(
-                                  "http://localhost:5000/api/applications/apply",
+                                 `${API_URL}/api/applications/apply`,
                                   { jobId: job._id },
                                   {
                                     headers: {

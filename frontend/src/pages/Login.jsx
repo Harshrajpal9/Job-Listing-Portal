@@ -5,6 +5,7 @@ import { FaEye, FaEyeSlash, FaEnvelope, FaLock } from "react-icons/fa";
 import toast from "react-hot-toast";
 import { UserContext } from "../context/UserContext";
 import { FaArrowLeft } from "react-icons/fa";
+import API_URL from "../config";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -18,7 +19,7 @@ export default function Login() {
     e.preventDefault();
 
     try {
-      const res = await axios.post("http://localhost:5000/api/auth/login", {
+      const res = await axios.post(`${API_URL}/api/auth/login`, {
         email: email.toLowerCase().trim(),
         password,
       });
@@ -40,12 +41,12 @@ export default function Login() {
       try {
         if (userData.role.toLowerCase() === "employer") {
           profileRes = await axios.get(
-            `http://localhost:5000/api/employers/${userData.email}`
+            `${API_URL}//api/employers/${userData.email}`
           );
           data = profileRes.data.data || userData; // if no profile yet, fallback
         } else {
           profileRes = await axios.get(
-            `http://localhost:5000/jobseeker/${userData.email}`
+            `${API_URL}/jobseeker/${userData.email}`
           );
           data = profileRes.data || userData;
         }
@@ -56,7 +57,7 @@ export default function Login() {
 
       // Prepare avatar
       const avatarUrl = data.avatar
-        ? `http://localhost:5000/uploads/avatars/${data.avatar}`
+        ? `${API_URL}/uploads/avatars/${data.avatar}`
         : null;
 
       const fullUser = {

@@ -10,6 +10,7 @@ import {
   FaEye,
   FaTrash,
 } from "react-icons/fa";
+import API_URL from "../config";
 
 const EmployerDashboard = () => {
   const [jobs, setJobs] = useState([]);
@@ -22,7 +23,7 @@ const EmployerDashboard = () => {
   const fetchJobs = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:5000/api/jobs/employer",
+        `${API_URL}/api/jobs/employer`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -48,7 +49,7 @@ const EmployerDashboard = () => {
 
     try {
       const res = await axios.get(
-        `http://localhost:5000/api/applications/job/${job._id}`,
+        `${API_URL}/api/applications/job/${job._id}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -66,7 +67,7 @@ const EmployerDashboard = () => {
   const handleDelete = async (jobId) => {
     try {
       await axios.delete(
-        `http://localhost:5000/api/jobs/${jobId}`,
+        `${API_URL}/api/jobs/${jobId}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }

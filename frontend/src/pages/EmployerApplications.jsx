@@ -14,6 +14,7 @@ import {
   FaTools,
   FaFileDownload,
 } from "react-icons/fa";
+import API_URL from "../config";
 
 export default function EmployerApplications() {
   const [apps, setApps] = useState([]);
@@ -29,7 +30,7 @@ export default function EmployerApplications() {
       }
 
       const res = await axios.get(
-        "http://localhost:5000/api/applications/employer",
+        `${API_URL}/api/applications/employer`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
 
@@ -50,7 +51,7 @@ export default function EmployerApplications() {
       const token = localStorage.getItem("token");
 
       await axios.put(
-        `http://localhost:5000/api/applications/${id}`,
+        `${API_URL}/api/applications/${id}`,
         { status },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -245,7 +246,7 @@ export default function EmployerApplications() {
                 {/* RESUME BUTTON */}
                 {selectedProfile.resume && (
                   <a
-                    href={`http://localhost:5000/uploads/resumes/${selectedProfile.resume}`}
+                    href={`${API_URL}/uploads/resumes/${selectedProfile.resume}`}
                     target="_blank"
                     rel="noreferrer"
                     className="flex items-center justify-center gap-2 mt-4 bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-700 transition"

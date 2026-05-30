@@ -4,6 +4,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { FaEye, FaEyeSlash, FaUserTie, FaBriefcase } from "react-icons/fa";
 import toast from "react-hot-toast";
 import { FaArrowLeft } from "react-icons/fa";
+import API_URL from "../config";
 
 function Register() {
   const navigate = useNavigate();
@@ -27,7 +28,7 @@ function Register() {
     }
 
     try {
-      await axios.post("http://localhost:5000/api/auth/register", {
+      await axios.post(`${API_URL}/api/auth/register`, {
         name,
         email: email.toLowerCase().trim(),
         password,

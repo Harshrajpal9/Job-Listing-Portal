@@ -5,6 +5,7 @@ import { FaBriefcase, FaMapMarkerAlt, FaPaperPlane } from "react-icons/fa";
 import Navbar from "../components/Navbar";
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import API_URL from "../config";
 
 export default function PostJob() {
   const { id } = useParams();
@@ -47,7 +48,7 @@ export default function PostJob() {
       if (isEdit) {
         const token = localStorage.getItem("token");
 
-        await axios.put(`http://localhost:5000/api/jobs/${id}`, form, {
+        await axios.put(`${API_URL}/api/jobs/${id}`, form, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -56,7 +57,7 @@ export default function PostJob() {
       } else {
         const token = localStorage.getItem("token");
 
-        await axios.post("http://localhost:5000/api/jobs", form, {
+        await axios.post(`${API_URL}/api/jobs`, form, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -88,7 +89,7 @@ export default function PostJob() {
       if (!id) return;
 
       try {
-        const res = await axios.get(`http://localhost:5000/api/jobs/${id}`);
+        const res = await axios.get(`${API_URL}/api/jobs/${id}`);
         setForm(res.data);
       } catch (err) {
         toast.error("Failed to load job");

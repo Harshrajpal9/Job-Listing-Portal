@@ -1,5 +1,6 @@
 import { createContext, useState, useEffect, useCallback } from "react";
 import axios from "axios";
+import API_URL from "../config";
 
 export const UserContext = createContext();
 
@@ -29,11 +30,11 @@ export const UserProvider = ({ children }) => {
 
       if (role === "employer") {
         // Employer API returns { success, data }
-        res = await axios.get(`http://localhost:5000/api/employers/${email}`);
+        res = await axios.get(`${API_URL}/api/employers/${email}`);
         data = res.data.data || {}; // <-- important: use .data for employer
       } else {
         // JobSeeker API returns user object directly
-        res = await axios.get(`http://localhost:5000/jobseeker/${email}`);
+        res = await axios.get(`${API_URL}/jobseeker/${email}`);
         data = res.data || {};
       }
 
@@ -41,7 +42,7 @@ export const UserProvider = ({ children }) => {
       const avatarUrl = data.avatar
         ? data.avatar.startsWith("http")
           ? data.avatar
-          : `http://localhost:5000/uploads/avatars/${data.avatar}`
+          : `${API_URL}/uploads/avatars/${data.avatar}`
         : null;
 
       const updatedUser = { ...data, avatar: avatarUrl };

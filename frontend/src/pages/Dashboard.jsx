@@ -10,6 +10,7 @@ import {
   FaTrash,
 } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import API_URL from "../config";
 
 const Dashboard = () => {
   const [applications, setApplications] = useState([]);
@@ -22,7 +23,7 @@ const Dashboard = () => {
   const fetchApplications = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:5000/api/applications/my",
+        `${API_URL}/api/applications/my`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -64,7 +65,7 @@ const Dashboard = () => {
   const handleWithdraw = async (id) => {
     try {
       await axios.delete(
-        `http://localhost:5000/api/applications/${id}`,
+        `${API_URL}/api/applications/${id}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }

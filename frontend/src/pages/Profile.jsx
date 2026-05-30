@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { UserContext } from "../context/UserContext";
+import API_URL from "../config";
 
 export default function Profile() {
   const { user, setUser } = useContext(UserContext);
@@ -56,13 +57,11 @@ export default function Profile() {
       }
 
       try {
-        const res = await axios.get(`http://localhost:5000/jobseeker/${email}`);
+        const res = await axios.get(`${API_URL}/jobseeker/${email}`);
         if (res.data) {
           const data = res.data;
           const avatarUrl = data.avatar
-            ? `http://localhost:5000/uploads/avatars/${
-                data.avatar
-              }?t=${Date.now()}`
+            ? `${API_URL}/uploads/avatars/${data.avatar}?t=${Date.now()}`
             : null;
 
           setProfile({
@@ -202,23 +201,21 @@ export default function Profile() {
       if (profileExists && user?._id) {
         // Update
         const res = await axios.put(
-          `http://localhost:5000/jobseeker/update/${user._id}`,
+          `${API_URL}/jobseeker/update/${user._id}`,
           formData,
           { headers: { "Content-Type": "multipart/form-data" } }
         );
         savedData = res.data;
       } else {
         // Create
-        const res = await axios.post(
-          "http://localhost:5000/jobseeker/create",
-          formData,
-          { headers: { "Content-Type": "multipart/form-data" } }
-        );
+        const res = await axios.post(`${API_URL}/jobseeker/create`, formData, {
+          headers: { "Content-Type": "multipart/form-data" },
+        });
         savedData = res.data.jobSeeker;
       }
 
       const avatarUrl = savedData.avatar
-        ? `http://localhost:5000/uploads/avatars/${
+        ? `${API_URL}/uploads/avatars/${
             savedData.avatar
           }?t=${Date.now()}`
         : null;

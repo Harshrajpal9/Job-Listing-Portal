@@ -3,6 +3,7 @@ import axios from "axios";
 import Navbar from "../components/Navbar";
 import { FaBriefcase, FaMapMarkerAlt } from "react-icons/fa";
 import toast from "react-hot-toast";
+import API_URL from "../config";
 
 
 export default function Applications() {
@@ -19,7 +20,7 @@ export default function Applications() {
       }
 
       const res = await axios.get(
-        "http://localhost:5000/api/applications/my",
+      `${API_URL}/api/applications/my`,
         {
           headers: {
             Authorization: `Bearer ${token}`, //  JWT header
