@@ -8,10 +8,9 @@ const employerRoutes = require("./routes/employerRoutes");
 const applicationRoutes = require("./routes/applicationRoutes");
 
 const app = express();
-
 const allowedOrigins = [
   "http://localhost:3000",
-  "https://nexaris-listing-portal-mu.vercel.app",
+  process.env.CLIENT_URL,
 ];
 
 app.use(
@@ -26,7 +25,6 @@ app.use(
     credentials: true,
   })
 );
-app.use(express.json());
 
 
 mongoose
