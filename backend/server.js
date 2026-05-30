@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
@@ -8,14 +9,19 @@ const applicationRoutes = require("./routes/applicationRoutes");
 
 const app = express();
 
-app.use(cors({
-  origin: "http://localhost:3000",
-  credentials: true
-}));
+app.use(
+  cors({
+    origin: process.env.CLIENT_URL,
+    credentials: true,
+  })
+);
 app.use(express.json());
 
-mongoose.connect("mongodb://127.0.0.1:27017/jobportal")
-.then(()=>console.log("MongoDB Connected"));
+
+mongoose
+  .connect(process.env.MONGO_URI)
+  .then(() => console.log("MongoDB Atlas Connected"))
+  .catch((err) => console.log(err));
 
 app.use("/api/auth",require("./routes/authRoutes"));
 app.use("/api/jobs",require("./routes/jobRoutes"));
