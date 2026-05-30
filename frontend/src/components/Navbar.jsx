@@ -1,5 +1,5 @@
 import { useNavigate, useLocation } from "react-router-dom";
-import { useState, useEffect, useContext } from "react";
+import { useState, useContext } from "react";
 import toast from "react-hot-toast";
 import {
   FaUserCircle,
@@ -19,9 +19,7 @@ export default function Navbar({ children, setIsEditing }) {
   const [open, setOpen] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
-  const [keyword, setKeyword] = useState("");
-
-
+ 
   const role = localStorage.getItem("role");
 
   const handleLogout = () => {

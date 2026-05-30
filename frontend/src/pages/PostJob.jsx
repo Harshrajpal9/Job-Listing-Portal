@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { FaBriefcase, FaMapMarkerAlt, FaPaperPlane } from "react-icons/fa";
+import { FaPaperPlane } from "react-icons/fa";
 import Navbar from "../components/Navbar";
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect } from "react";

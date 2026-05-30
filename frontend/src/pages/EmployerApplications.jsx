@@ -3,8 +3,6 @@ import axios from "axios";
 import Navbar from "../components/Navbar";
 import toast from "react-hot-toast";
 import {
-  FaCheckCircle,
-  FaTimesCircle,
   FaEnvelope,
   FaUser,
   FaClipboardList,
